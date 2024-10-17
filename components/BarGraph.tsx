@@ -75,7 +75,7 @@ const BarGraph = () => {
     <BarChart
  
     data={barData}
-    width={screenWidth/1.1}
+    width={screenWidth-50}
     height={220}
     fromZero={true}
     yLabelsOffset={35}  // Adds space to Y-axis numbers
@@ -108,6 +108,7 @@ const BarGraph = () => {
       style: {
         borderRadius: 16,  // Round corners of the chart container
         // padding:10,
+        backgroundColor:'red'
        
       },
       propsForBackgroundLines: {
@@ -120,10 +121,10 @@ const BarGraph = () => {
         fontSize: 12, // Label font size
         fontWeight: "bold"
       },
-    //   barRadius: 10 
+  
     }}
     // verticalLabelRotation={30}
-    // style={{ backgroundColor: "red" }}
+ 
   />
   )
 };

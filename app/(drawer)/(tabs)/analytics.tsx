@@ -24,6 +24,9 @@ import { UPCOMING_BOOKINGS_DATA } from "@/data/data";
 import RawBottomSheet from "@/components/RawBottomSheet";
 import TwoButtonsView from "@/components/TwoButtonsView";
 import SuccessModal from "@/components/SuccessModal";
+import IconButton from "@/components/IconButton";
+import { Ionicons } from "@expo/vector-icons";
+import BarGraph from "@/components/BarGraph";
 
 // Define the type for your dashboard data
 type DashboardData = {
@@ -114,6 +117,33 @@ const AnalyticsTab = () => {
          <Card title="Total Jobs Done" value={`${(dashboardData.totalJobsDone / 1000).toFixed(2)}k`} />
 
         </View>
+
+        <View style={styles.chartContainer}>
+        <View style={styles.roundedCorners}>
+          
+        <BarGraph/>
+
+        </View>
+        </View>
+
+
+
+
+
+        <View style={styles.statsCard}>
+            <IconButton
+              disable={true}
+              style={{ backgroundColor: allColors.primary100 }}
+            >
+              <Ionicons
+                name="wallet-outline"
+                size={24}
+                color={allColors.primary1000}
+              />
+            </IconButton>
+            <Text style={styles.cardTitle}>Total Spend</Text>
+            <Text style={styles.cardValue}>$ 3,461.00</Text>
+          </View>
 
       
       </ScrollView>
@@ -211,6 +241,16 @@ const styles = StyleSheet.create({
     padding: 10,
     // ...StyleSheet.absoluteFillObject,
   },
+  chartContainer: {
+    // padding: 10,
+    backgroundColor: '#fff',
+    marginHorizontal: 10,
+  },
+  roundedCorners: {
+    borderRadius: 16, // Round corners of the entire chart container
+    overflow: 'hidden', // Ensure content respects the borderRadius
+   
+  },
 
   card: {
     backgroundColor: allColors.primary1000, // Matching the card color
@@ -227,6 +267,23 @@ const styles = StyleSheet.create({
   },
   value: {
     ...getTypography(36, 44, allColors.text100, allFonts.URBANIST_Bold),
+  },
+  statsCard: {
+    backgroundColor: "rgba(249, 250, 251, 0.15)",
+    borderRadius: 10,
+    padding: 15,
+    width: "48%",
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  cardTitle: {
+    ...getTypography(16, 24, allColors.text100, allFonts.URBANIST),
+
+    marginTop: 10,
+  },
+  cardValue: {
+    ...getTypography(18, 24, allColors.text100, allFonts.URBANIST_Bold),
+    marginTop: 5,
   },
 });
 
