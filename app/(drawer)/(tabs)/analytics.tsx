@@ -1,32 +1,30 @@
-import React, { useRef, useState } from "react";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-  StatusBar,
-  Dimensions,
-} from "react-native";
-import TopNavBar from "../../../components/TopNavBar";
-import SearchBar from "../../screens/HomeScreens/SearchBar";
-import SpecialOffers from "../../screens/HomeScreens/SpecialOffers";
-import Categories from "../../screens/HomeScreens/Categories";
-import PopularServices from "../../screens/HomeScreens/PopularServices";
-import SectionHeading from "../../screens/HomeScreens/SectionHeading";
+import BarGraph from "@/components/BarGraph";
+import BottomSheetView from "@/components/BottomSheetView";
+import IconButton from "@/components/IconButton";
+import InputBox from "@/components/InputBox";
+import LongButton from "@/components/LongButton";
+import SuccessModal from "@/components/SuccessModal";
+import TwoButtonsView from "@/components/TwoButtonsView";
+import { allColors } from "@/constants/Colors";
+import { allFonts } from "@/constants/Fonts";
+import { getTypography } from "@/styles";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import PrimaryButton from "@/components/PrimaryButton";
-import { allColors } from "@/constants/Colors";
-import { getTypography } from "@/styles";
-import { allFonts } from "@/constants/Fonts";
-import BookingCard from "@/components/BookingCard";
-import { UPCOMING_BOOKINGS_DATA } from "@/data/data";
+import React, { useRef, useState } from "react";
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from "react-native";
+import TopNavBar from "../../../components/TopNavBar";
 import RawBottomSheet from "@/components/RawBottomSheet";
-import TwoButtonsView from "@/components/TwoButtonsView";
-import SuccessModal from "@/components/SuccessModal";
-import IconButton from "@/components/IconButton";
-import { Ionicons } from "@expo/vector-icons";
-import BarGraph from "@/components/BarGraph";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Portal } from "react-native-portalize";
+import DropDownPicker from "react-native-dropdown-picker";
 
 // Define the type for your dashboard data
 type DashboardData = {
@@ -48,11 +46,23 @@ const initialData: DashboardData = {
   totalJobsDone: 1650,
 };
 
+const servicesList = [
+  { id: "1", name: "al falah bank" },
+  { id: "2", name: "askri bank" },
+  { id: "3", name: "al habib bank" },
+  { id: "4", name: "habib bank" },
+  { id: "5", name: "allied bank" },
+];
+
 const AnalyticsTab = () => {
   const router = useRouter();
   const bottomSheetRef = useRef(null);
   const [item, setItem] = useState();
   const [modalVisible, setModalVisible] = useState(false);
+  const sheetRef = useRef(null);
+  const [offerBudget, setOfferBudget] = useState("");
+  const [open, setOpen] = useState(false);
+  const [serviceId, setServiceId] = useState("");
 
   const [dashboardData, setDashboardData] =
     useState<DashboardData>(initialData);
@@ -67,18 +77,186 @@ const AnalyticsTab = () => {
     </View>
   );
 
-  function toggleModal () {
-    setModalVisible(!modalVisible)
+  function toggleModal() {
+    setModalVisible(!modalVisible);
+  }
+
+  function getContent() {
+    return (
+      <View
+        style={{
+          // backgroundColor:'red',
+          padding: 20,
+          justifyContent: "center",
+        }}
+      >
+        <Text
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: allColors.stroke,
+            paddingBottom: 20,
+            marginBottom: 20,
+            textAlign: "center",
+            ...getTypography(
+              24,
+              32,
+              allColors.text1000,
+              allFonts.URBANIST_Bold
+            ),
+          }}
+        >
+       Withdrawal Amount
+        </Text>
+
+        <LinearGradient
+          // Define the colors for the gradient
+          colors={["#FF9284", "#FE725F"]}
+          // Apply the gradient at an angle of roughly 174 degrees
+          start={{ x: 0.5, y: 0 }} // Starting point of the gradient
+          end={{ x: 0.1, y: 1 }}
+          style={{
+            // ...StyleSheet.absoluteFillObject,
+            // padding: 15,
+            backgroundColor: allColors.primary1000, // Matching the card color
+            borderRadius: 24,
+            // padding: 20,
+            // margin: 5,
+            // width: Dimensions.get("screen").width / 2 - 20,
+            height: 142,
+            // alignItems: "center",
+            justifyContent: "space-around",
+            marginBottom:15,
+          }}
+        >
+          <Image source={require("@/assets/images/box.png")} />
+
+            <View 
+             style={{
+              position:'absolute',
+              top:0,
+              right:0,
+              bottom:0,
+              left:0,
+              // ...StyleSheet.absoluteFillObject,
+              // padding: 15,
+             
+              // borderRadius: 24,
+              padding: 20,
+              // margin: 5,
+              // width: Dimensions.get("screen").width / 2 - 20,
+              // height: 142,
+              alignItems: "center",
+              justifyContent: "space-around",
+            }}
+            
+            >
+            <Text
+            style={{
+        
+              ...getTypography(
+                36,
+                44,
+                allColors.text100,
+                allFonts.URBANIST_Bold
+              ),
+            }}
+          >
+            $410.89
+          </Text>
+          <Text
+            style={{
+              ...getTypography(18, 26, allColors.text100, allFonts.URBANIST),
+            }}
+          >
+            Available for withdrawl
+          </Text>
+            </View>
+
+    
+        </LinearGradient>
+
+        <InputBox
+          value={offerBudget}
+          label="Offer Budget"
+          placeholder="Enter your offering budget"
+          onChangeText={(text: string) => setOfferBudget(text)}
+          style={{ color: allColors.text900, }}
+          labelStyle={{ color: allColors.text900 }}
+          placeholderTextColor={allColors.tertiary300}
+          keyboardType={"numeric"}
+       
+        />
+
+<Text style={[styles.label]}>Select Account</Text>
+       
+        <DropDownPicker
+          selectedItemContainerStyle={{
+            backgroundColor: allColors.primary100,
+          }}
+          TickIconComponent={({ style }) => (
+            <MaterialIcons
+              name="check"
+              size={24}
+              color={allColors.primary1000}
+            />
+          )}
+          dropDownDirection="BOTTOM"
+          // listMode="MODAL"
+          placeholder={"Enter Service you want"}
+          placeholderStyle={{
+            color: allColors.tertiary300,
+            // fontWeight: "bold"
+          }}
+          textStyle={{
+            color: "#666666",
+            // fontWeight: "bold"
+          }}
+          style={{
+            borderWidth: 1,
+            borderColor: allColors.stroke,
+
+            borderRadius: 25,
+            padding: 10,
+            marginBottom: 15,
+            backgroundColor: "#fff",
+          }}
+          schema={{
+            label: "name",
+            value: "id",
+          }}
+          searchable={false}
+          open={open}
+          value={serviceId}
+          items={servicesList}
+          setOpen={setOpen}
+          setValue={setServiceId}
+
+          //setVehicleMake={setVehicleMake}
+        />
+        <TwoButtonsView
+          // style={{marginTop:100}}
+          title1={"Cancel"}
+          title2={"Withdraw Amount"}
+          onPress2={() => {
+            sheetRef.current?.close();
+            // sheetRef.current?.snapToIndex(-1);
+           toggleModal()
+          }}
+          style2={{ flex: 2 }}
+        />
+      </View>
+    );
   }
 
   return (
+   
     <LinearGradient
       // Define the colors for the gradient
       colors={["#1C0D24", "#6A318A"]}
       // Apply the gradient at an angle of roughly 174 degrees
       start={{ x: 0.5, y: 0 }} // Starting point of the gradient
       end={{ x: 0.1, y: 1 }}
-      style={{ flex: 1 }}
+      style={{ ...StyleSheet.absoluteFillObject }}
     >
       <TopNavBar
         messageNotification={true}
@@ -102,6 +280,7 @@ const AnalyticsTab = () => {
             // flexGrow: 1,
             justifyContent: "center",
             alignItems: "center",
+            marginBottom: 15,
             // padding: 16,
             // backgroundColor: 'red',
           }}
@@ -114,123 +293,72 @@ const AnalyticsTab = () => {
           <Card title="Average Rating" value={dashboardData.averageRating} />
           <Card title="Jobs Available" value={dashboardData.jobsAvailable} />
           <Card title="Assigned Jobs" value={dashboardData.assignedJobs} />
-         <Card title="Total Jobs Done" value={`${(dashboardData.totalJobsDone / 1000).toFixed(2)}k`} />
-
+          <Card
+            title="Total Jobs Done"
+            value={`${(dashboardData.totalJobsDone / 1000).toFixed(2)}k`}
+          />
         </View>
 
-        <View style={styles.chartContainer}>
-        <View style={styles.roundedCorners}>
-          
-        <BarGraph/>
-
-        </View>
-        </View>
-
-
-
-
-
-        <View style={styles.statsCard}>
-            <IconButton
-              disable={true}
-              style={{ backgroundColor: allColors.primary100 }}
-            >
-              <Ionicons
-                name="wallet-outline"
-                size={24}
-                color={allColors.primary1000}
-              />
-            </IconButton>
-            <Text style={styles.cardTitle}>Total Spend</Text>
-            <Text style={styles.cardValue}>$ 3,461.00</Text>
-          </View>
-
-      
-      </ScrollView>
-
-      <RawBottomSheet ref={bottomSheetRef} height={500}>
-        <View
+        <Text
           style={{
-            // backgroundColor:'red',
-            padding: 20,
-            justifyContent: "center",
+            marginLeft: 10,
+            marginBottom: 15,
+            ...getTypography(16, 24, allColors.text100, allFonts.URBANIST_Bold),
           }}
         >
-          <Text
-            style={{
-              borderBottomWidth: 1,
-              borderBottomColor: allColors.stroke,
-              paddingBottom: 20,
-              marginBottom: 20,
-              textAlign: "center",
-              ...getTypography(
-                24,
-                32,
-                allColors.text1000,
-                allFonts.URBANIST_Bold
-              ),
-            }}
-          >
-            Cancel Booking
-          </Text>
-          <BookingCard
-            item={item}
-            screenName={"Upcoming"}
-            buttonBG={allColors.primary200}
-            textColor={allColors.primary1000}
-            contentHeight={380}
-            showButton={false}
-            style={{
-              borderWidth: 1,
-              borderColor: allColors.stroke,
-            }}
-            titleStyle={{ color: allColors.black }}
-            subTitleStyle={{ color: allColors.black }}
-          />
+          Orders Summary
+        </Text>
 
-          <Text
-            style={{
-              marginTop: 10,
-
-              textAlign: "center",
-              ...getTypography(20, 28, "#212121", allFonts.URBANIST),
-            }}
-          >
-            Are you sure want to cancel your service booking?
-          </Text>
-
-          <Text
-            style={{
-              marginTop: 10,
-              marginBottom:15,
-
-              textAlign: "center",
-              ...getTypography(14, 22, "#424242", allFonts.URBANIST),
-            }}
-          >
-            Only 80% of the money you can refund from your payment according to
-            our policy
-          </Text>
-            <TwoButtonsView title1={'Cancel'} title2={'Yes, Cancel Booking'}
-            onPress2={()=>{
-            
-              bottomSheetRef.current.close()
-              toggleModal()
-            }}
-            style2={{flex:2}}/>
-
+        <View style={styles.chartContainer}>
+          <View style={styles.roundedCorners}>
+            <BarGraph />
+          </View>
         </View>
-      </RawBottomSheet>
 
-      <SuccessModal 
-      visible={modalVisible} 
-      toggleModal={toggleModal}
-      onPress={toggleModal}
-      title={"Cancel Booking Successful!"}
-      subTitle={" You have successfully canceled your service booking. 80% funds will be returned to your account."}
-      
+        <View style={styles.statsCard}>
+          <IconButton
+            disable={true}
+            style={{ backgroundColor: allColors.primary100 }}
+          >
+            <Ionicons
+              name="wallet-outline"
+              size={24}
+              color={allColors.warning800}
+            />
+          </IconButton>
+          <Text style={styles.cardTitle}>Available for withdrawl</Text>
+          <Text style={styles.cardValue}>$ 3,461.00</Text>
+        </View>
+
+        <LongButton
+          title={"Withdraw Now"}
+          onPress={() => {
+            // bottomSheetRef.current?.open()
+            sheetRef.current?.expand();
+            sheetRef.current?.snapToIndex(2);
+          }}
+        />
+      </ScrollView>
+      {/* <RawBottomSheet ref={bottomSheetRef} height={500}>
+      {getContent()}
+        </RawBottomSheet> */}
+        <Portal>
+
+      <BottomSheetView ref={sheetRef}>{getContent()}</BottomSheetView>
+
+      </Portal>
+
+      <SuccessModal
+        visible={modalVisible}
+        toggleModal={toggleModal}
+        onPress={toggleModal}
+        title={"Withdrawal Completed Successful!"}
+        // subTitle={
+        //   " You have successfully canceled your service booking. 80% funds will be returned to your account."
+        // }
       />
     </LinearGradient>
+   
   );
 };
 
@@ -243,13 +371,12 @@ const styles = StyleSheet.create({
   },
   chartContainer: {
     // padding: 10,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     marginHorizontal: 10,
   },
   roundedCorners: {
     borderRadius: 16, // Round corners of the entire chart container
-    overflow: 'hidden', // Ensure content respects the borderRadius
-   
+    overflow: "hidden", // Ensure content respects the borderRadius
   },
 
   card: {
@@ -270,10 +397,12 @@ const styles = StyleSheet.create({
   },
   statsCard: {
     backgroundColor: "rgba(249, 250, 251, 0.15)",
-    borderRadius: 10,
+    borderRadius: 16,
+    marginHorizontal: 10,
     padding: 15,
-    width: "48%",
-    // justifyContent: 'center',
+    marginVertical: 25,
+    // width: "48%",
+    justifyContent: "center",
     // alignItems: 'center',
   },
   cardTitle: {
@@ -282,8 +411,19 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   cardValue: {
-    ...getTypography(18, 24, allColors.text100, allFonts.URBANIST_Bold),
-    marginTop: 5,
+    position: "absolute",
+    right: 10,
+
+    ...getTypography(25, 44, allColors.text100, allFonts.URBANIST_Bold),
+    // marginTop: 5,
+  },
+  label: {
+    fontSize: 14,
+    color: allColors.text900,
+    fontFamily: allFonts.URBANIST_SEMIBOLD,
+    lineHeight: 22,
+    marginBottom: 4,
+    marginLeft: 10,
   },
 });
 

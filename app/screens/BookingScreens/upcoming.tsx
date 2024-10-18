@@ -128,7 +128,8 @@ function toggleModal () {
             Only 80% of the money you can refund from your payment according to
             our policy
           </Text>
-            <TwoButtonsView title1={'Cancel'} title2={'Yes, Cancel Booking'}
+            <TwoButtonsView title1={'Cancel'}
+             title2={'Yes, Cancel Booking'}
             onPress2={()=>{
             
               bottomSheetRef.current.close()

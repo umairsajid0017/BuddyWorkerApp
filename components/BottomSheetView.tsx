@@ -6,7 +6,7 @@ const BottomSheetViewComponent = (props : any,ref : any) => {
 
 
     // variables
-    const snapPoints = useMemo(() => ["35%","40%","60%"], []);
+    const snapPoints = useMemo(() => ["35%","40%","60%","80%"], []);
 
     // callbacks
     const handleSheetChange = useCallback((index : number) => {

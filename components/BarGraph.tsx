@@ -75,7 +75,7 @@ const BarGraph = () => {
     <BarChart
  
     data={barData}
-    width={screenWidth-50}
+    width={screenWidth-40}
     height={220}
     fromZero={true}
     yLabelsOffset={35}  // Adds space to Y-axis numbers
