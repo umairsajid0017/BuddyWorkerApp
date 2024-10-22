@@ -105,6 +105,15 @@ const ExpandableServiceCard = ({
           {/* Buttons */}
           {showButton && (
             <View style={styles.buttonRow}>
+                      <View
+                style={[styles.completedButton, { backgroundColor: buttonBG }]}
+              >
+                <Text
+                  style={[styles.completedButtonText, { color: textColor }]}
+                >
+                  {screenName}
+                </Text>
+              </View>
               
               <TouchableOpacity
                 onPress={toggleExpand}
@@ -163,7 +172,7 @@ const ExpandableServiceCard = ({
             </View>
           )}
 
-          {(screenName === "Upcoming" || screenName === "Cancelled") && (
+          {(screenName === "Started" || screenName === "Cancelled") && (
             <Image
               source={require("@/assets/images/map_view.png")}
               style={styles.mapImage}

@@ -71,10 +71,77 @@ const AnalyticsTab = () => {
     title,
     value,
   }) => (
-    <View style={styles.card}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.value}>{value}</Text>
-    </View>
+
+    <LinearGradient
+    // Define the colors for the gradient
+    colors={["#FF9284", "#FE725F"]}
+    // Apply the gradient at an angle of roughly 174 degrees
+    start={{ x: 0.5, y: 0 }} // Starting point of the gradient
+    end={{ x: 0.1, y: 1 }}
+    style={{
+      // // ...StyleSheet.absoluteFillObject,
+      // // padding: 15,
+      // backgroundColor: allColors.primary1000, // Matching the card color
+      // borderRadius: 24,
+      // // padding: 20,
+      // // margin: 5,
+      // // width: Dimensions.get("screen").width / 2 - 20,
+      // height: 142,
+      // // alignItems: "center",
+      // justifyContent: "space-around",
+      // marginBottom:15,
+
+...styles.card
+
+    }}
+  >
+                <Image
+                style={{
+                  width: Dimensions.get("screen").width / 2 - 20,
+                  height: 142,
+                      borderRadius: 24,
+
+                }}
+                source={require("@/assets/images/box1.png")} />
+
+                <View 
+             style={{
+              position:'absolute',
+              top:0,
+              right:0,
+              bottom:0,
+              left:0,
+              // ...StyleSheet.absoluteFillObject,
+              // padding: 15,
+             
+              // borderRadius: 24,
+              padding: 20,
+              // margin: 5,
+              // width: Dimensions.get("screen").width / 2 - 20,
+              // height: 142,
+              alignItems: "center",
+              justifyContent: "space-around",
+            }}
+            
+            >
+
+<Text style={styles.title}>{title}</Text>
+<Text style={styles.value}>{value}</Text>
+
+              </View>
+
+
+
+
+   
+     
+
+      </LinearGradient>
+
+   
+
+
+  
   );
 
   function toggleModal() {
@@ -128,7 +195,7 @@ const AnalyticsTab = () => {
             marginBottom:15,
           }}
         >
-          <Image source={require("@/assets/images/box.png")} />
+          <Image source={require("@/assets/images/box2.png")} />
 
             <View 
              style={{
@@ -376,11 +443,11 @@ const styles = StyleSheet.create({
   },
   roundedCorners: {
     borderRadius: 16, // Round corners of the entire chart container
-    overflow: "hidden", // Ensure content respects the borderRadius
+    overflow: "hidden", // Ensure content respects the borderRadius   
   },
 
   card: {
-    backgroundColor: allColors.primary1000, // Matching the card color
+    // backgroundColor: allColors.primary1000, // Matching the card color
     borderRadius: 24,
     // padding: 20,
     margin: 5,

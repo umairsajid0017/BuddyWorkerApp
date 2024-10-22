@@ -172,7 +172,16 @@ const index = () => {
 
         <View style={{ marginTop: 20 }} />
 
-        <SectionHeading heading="Photos & Videos" />
+        <SectionHeading heading="Photos & Videos"
+          onPress={() =>
+            router.push({
+              pathname: "/screens/SeeAllScreens/[SeeAll]",
+              params: { SeeAll: "jobs_assigned" },
+            })
+          }
+          isSeeAll={true}
+        
+        />
 
         <PhotoSection />
 

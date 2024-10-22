@@ -48,13 +48,13 @@ function toggleModal () {
               <BookingCard
                 key={item.id}
                 item={item}
-                screenName={"Upcoming"}
+                screenName={"Started"}
                 buttonBG={allColors.primary200}
                 textColor={allColors.primary1000}
                 contentHeight={380}
                 showButton={true}
-                title1={"Cancel Booking"}
-                title2={"Chat"}
+                title1={"Reject Work"}
+                title2={"Start Work"}
                 onPress1={() => {
                   setItem(item);
                   bottomSheetRef.current.open();

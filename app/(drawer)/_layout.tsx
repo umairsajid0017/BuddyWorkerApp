@@ -34,6 +34,7 @@ import RawBottomSheet from "@/components/RawBottomSheet";
 import PrimaryButton from "@/components/PrimaryButton";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import { AntDesign } from "@expo/vector-icons";
 
 function CustomDrawerContent(props: any) {
   const [darkMode, setDarkMode] = useState(true);
@@ -81,26 +82,7 @@ function CustomDrawerContent(props: any) {
         </LinearGradient>
             </PrimaryButton>
 
-        {/* Drawer Items */}
 
-        <TouchableOpacity
-          onPress={() => router.push("/screens/Dashboard/dashboard")}
-          style={styles.drawerItem}
-        >
-          <IconButton
-            disable={true}
-            style={{
-              height: 40,
-              width: 40,
-              marginRight: 15,
-              backgroundColor: allColors.primary100,
-            }}
-            // onPress={() => router.back()}
-          >
-            <HomeSvg color={allColors.primary1000} />
-          </IconButton>
-          <Text style={styles.drawerItemText}>Dashboard</Text>
-        </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => router.push("/screens/ProfileScreens/EditProfile")}
@@ -141,34 +123,10 @@ function CustomDrawerContent(props: any) {
           <Text style={styles.drawerItemText}>My Calendar</Text>
         </TouchableOpacity>
 
-        {/* Dark Mode Switch */}
-        <View style={styles.drawerItem}>
-          <IconButton
-            disable={true}
-            style={{
-              height: 40,
-              width: 40,
-              marginRight: 15,
-              backgroundColor: allColors.tertiary100,
-            }}
-            onPress={() => router.back()}
-          >
-            <EyeSvg color={allColors.tertiary900} />
-          </IconButton>
-          <Text style={styles.drawerItemText}>Dark Mode</Text>
+  
 
-          <Switch
-            trackColor={{ false: "#767577", true: "#8e44ad" }}
-            thumbColor={darkMode ? "#ffffff" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={setDarkMode}
-            value={darkMode}
-            style={{ marginLeft: 60 }}
-          />
-        </View>
-
-        {/* Other Drawer Items */}
-        <TouchableOpacity
+   
+        {/* <TouchableOpacity
           onPress={() => router.push("/screens/Language")}
           style={styles.drawerItem}
         >
@@ -184,7 +142,7 @@ function CustomDrawerContent(props: any) {
             <LanguageSvg color={allColors.info800} />
           </IconButton>
           <Text style={styles.drawerItemText}>Language</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           onPress={() =>
@@ -226,6 +184,26 @@ function CustomDrawerContent(props: any) {
 
         <TouchableOpacity
           onPress={() =>
+            router.push("/screens/MyServices")
+          }
+          style={styles.drawerItem}
+        >
+           <IconButton
+            disable={true}
+            style={{
+              height: 40,
+              width: 40,
+              marginRight: 15,
+              backgroundColor: allColors.info200,
+            }}
+          >
+            <LanguageSvg color={allColors.info800} />
+          </IconButton>
+          <Text style={styles.drawerItemText}>My Services</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() =>
             router.push("/screens/NotificationScreens/NotificationSettings")
           }
           style={styles.drawerItem}
@@ -239,9 +217,9 @@ function CustomDrawerContent(props: any) {
               backgroundColor: allColors.secondary100,
             }}
           >
-            <BellSvg color={allColors.secondary1000} />
+         <AntDesign name="star" size={18} color= {allColors.secondary1000} />
           </IconButton>
-          <Text style={styles.drawerItemText}>Notifications</Text>
+          <Text style={styles.drawerItemText}>Reviews</Text>
         </TouchableOpacity>
 
         <TouchableOpacity

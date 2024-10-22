@@ -1,14 +1,15 @@
+import { Tabs } from "expo-router";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
+import UpcomingScreen from "@/app/screens/BookingScreens/upcoming";
+import CancelledScreen from "@/app/screens/BookingScreens/cancelled";
+import CompletedScreen from "@/app/screens/BookingScreens/completed";
 
+import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet } from "react-native";
 import { allColors } from "@/constants/Colors";
 import { allFonts } from "@/constants/Fonts";
-import { LinearGradient } from "expo-linear-gradient";
-import { StatusBar, StyleSheet } from "react-native";
-import CallsList from "./CallsList";
-import ChatList from "./ChatsList";
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import TopNavBar from '@/components/TopNavBar';
+import TopNavBar from "@/components/TopNavBar";
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -23,21 +24,14 @@ export default function Layout() {
     end={{ x: 0.1, y: 1 }}
     style={{ ...StyleSheet.absoluteFillObject }}
   >
-      <StatusBar
-        barStyle="light-content" // Set the text/icons to light content, use "dark-content" for dark text/icons
-      />
     <TopNavBar
-
-      searchDot={true}
-      backBtnWithTitle={true}
-   
-      title="Inbox"
-      style={{ padding: 10, marginTop: 40,  }}
        
-
+        
+      title="My Orders"
+      style={{ padding: 10, marginTop: 40,  }}
+        menuBtnWithTitle={true}
+        messageNotification={true}
     />
-
-<GestureHandlerRootView>
 
     <Tab.Navigator
       screenOptions={{
@@ -48,7 +42,6 @@ export default function Layout() {
           //               // padding:4.5
                     
           //           },
-          swipeEnabled:false,
         tabBarStyle: {
           backgroundColor: 'transparent', // Tab background color
        
@@ -75,12 +68,10 @@ export default function Layout() {
         
       }}
     >
-      <Tab.Screen name="Chats" component={ChatList} />
-      {/* <Tab.Screen name="Calls" component={CallsList} /> */}
-
+      <Tab.Screen name="Active" component={UpcomingScreen} />
+      <Tab.Screen name="Done" component={CompletedScreen} />
+      <Tab.Screen name="Cancelled" component={CancelledScreen} />
     </Tab.Navigator>
-    </GestureHandlerRootView>
     </LinearGradient>
- 
   );
 }

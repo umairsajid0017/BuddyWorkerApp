@@ -1,29 +1,26 @@
-import React, { useRef, useState } from "react";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-  StatusBar,
-  Dimensions,
-} from "react-native";
-import TopNavBar from "../../../components/TopNavBar";
-import SearchBar from "../../screens/HomeScreens/SearchBar";
-import SpecialOffers from "../../screens/HomeScreens/SpecialOffers";
-import Categories from "../../screens/HomeScreens/Categories";
-import PopularServices from "../../screens/HomeScreens/PopularServices";
-import SectionHeading from "../../screens/HomeScreens/SectionHeading";
+import BookingCard from "@/components/BookingCard";
+import RawBottomSheet from "@/components/RawBottomSheet";
+import SuccessModal from "@/components/SuccessModal";
+import TwoButtonsView from "@/components/TwoButtonsView";
+import { allColors } from "@/constants/Colors";
+import { allFonts } from "@/constants/Fonts";
+import { UPCOMING_BOOKINGS_DATA } from "@/data/data";
+import { getTypography } from "@/styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import PrimaryButton from "@/components/PrimaryButton";
-import { allColors } from "@/constants/Colors";
-import { getTypography } from "@/styles";
-import { allFonts } from "@/constants/Fonts";
-import BookingCard from "@/components/BookingCard";
-import { UPCOMING_BOOKINGS_DATA } from "@/data/data";
-import RawBottomSheet from "@/components/RawBottomSheet";
-import TwoButtonsView from "@/components/TwoButtonsView";
-import SuccessModal from "@/components/SuccessModal";
+import React, { useRef, useState } from "react";
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from "react-native";
+import TopNavBar from "../../../components/TopNavBar";
+import PopularServices from "../../screens/HomeScreens/PopularServices";
+import SectionHeading from "../../screens/HomeScreens/SectionHeading";
+import WorkersOfferCard from "@/components/WorkerOfferCard";
 
 // Define the type for your dashboard data
 type DashboardData = {
@@ -58,14 +55,64 @@ const HomeTab = () => {
     title,
     value,
   }) => (
-    <View style={styles.card}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.value}>{value}</Text>
-    </View>
+    <LinearGradient
+      // Define the colors for the gradient
+      colors={["#FF9284", "#FE725F"]}
+      // Apply the gradient at an angle of roughly 174 degrees
+      start={{ x: 0.5, y: 0 }} // Starting point of the gradient
+      end={{ x: 0.1, y: 1 }}
+      style={{
+        // // ...StyleSheet.absoluteFillObject,
+        // // padding: 15,
+        // backgroundColor: allColors.primary1000, // Matching the card color
+        // borderRadius: 24,
+        // // padding: 20,
+        // // margin: 5,
+        // // width: Dimensions.get("screen").width / 2 - 20,
+        // height: 142,
+        // // alignItems: "center",
+        // justifyContent: "space-around",
+        // marginBottom:15,
+
+        ...styles.card,
+      }}
+    >
+      <Image
+        style={{
+          width: Dimensions.get("screen").width / 2 - 20,
+          height: 142,
+          borderRadius: 24,
+        }}
+        source={require("@/assets/images/box1.png")}
+      />
+
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          // ...StyleSheet.absoluteFillObject,
+          // padding: 15,
+
+          // borderRadius: 24,
+          padding: 20,
+          // margin: 5,
+          // width: Dimensions.get("screen").width / 2 - 20,
+          // height: 142,
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.value}>{value}</Text>
+      </View>
+    </LinearGradient>
   );
 
-  function toggleModal () {
-    setModalVisible(!modalVisible)
+  function toggleModal() {
+    setModalVisible(!modalVisible);
   }
 
   return (
@@ -113,36 +160,22 @@ const HomeTab = () => {
         </View>
 
         <SectionHeading
-          heading="Jobs Assigned"
+          heading="Customer Offers"
           onPress={() =>
             router.push({
               pathname: "/screens/SeeAllScreens/[SeeAll]",
               params: { SeeAll: "jobs_assigned" },
             })
           }
-          isSeeAll={true}
+          isSeeAll={false}
         />
 
-        {UPCOMING_BOOKINGS_DATA.map((item) => {
+        {UPCOMING_BOOKINGS_DATA.map((item: any) => {
           return (
-            <BookingCard
-                key={item.id}
-                item={item}
-                screenName={"Upcoming"}
-                buttonBG={allColors.primary200}
-                textColor={allColors.primary1000}
-                contentHeight={380}
-                showButton={true}
-                title1={"Reject Work"}
-                title2={"Start Work"}
-                onPress1={() => {
-                  setItem(item);
-                  bottomSheetRef.current.open();
-                }}
-              />
+       <WorkersOfferCard/>
           );
         })}
-
+{/* 
         <SectionHeading
           heading="Upcoming Jobs"
           onPress={() =>
@@ -154,7 +187,7 @@ const HomeTab = () => {
           isSeeAll={true}
         />
 
-        <PopularServices />
+        <PopularServices /> */}
       </ScrollView>
 
       <RawBottomSheet ref={bottomSheetRef} height={500}>
@@ -211,7 +244,7 @@ const HomeTab = () => {
           <Text
             style={{
               marginTop: 10,
-              marginBottom:15,
+              marginBottom: 15,
 
               textAlign: "center",
               ...getTypography(14, 22, "#424242", allFonts.URBANIST),
@@ -220,24 +253,26 @@ const HomeTab = () => {
             Only 80% of the money you can refund from your payment according to
             our policy
           </Text>
-            <TwoButtonsView title1={'Cancel'} title2={'Yes, Cancel Booking'}
-            onPress2={()=>{
-            
-              bottomSheetRef.current.close()
-              toggleModal()
+          <TwoButtonsView
+            title1={"Cancel"}
+            title2={"Yes, Cancel Booking"}
+            onPress2={() => {
+              bottomSheetRef.current.close();
+              toggleModal();
             }}
-            style2={{flex:2}}/>
-
+            style2={{ flex: 2 }}
+          />
         </View>
       </RawBottomSheet>
 
-      <SuccessModal 
-      visible={modalVisible} 
-      toggleModal={toggleModal}
-      onPress={toggleModal}
-      title={"Cancel Booking Successful!"}
-      subTitle={" You have successfully canceled your service booking. 80% funds will be returned to your account."}
-      
+      <SuccessModal
+        visible={modalVisible}
+        toggleModal={toggleModal}
+        onPress={toggleModal}
+        title={"Cancel Booking Successful!"}
+        subTitle={
+          " You have successfully canceled your service booking. 80% funds will be returned to your account."
+        }
       />
     </LinearGradient>
   );

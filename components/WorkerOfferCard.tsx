@@ -16,7 +16,7 @@ const WorkersOfferCard = ({item,style}:any) => {
       
         <View style={{flexDirection:'row'}}>
         <Image
-          source={require("../assets/images/AidFast.png")}
+          source={require("../assets/images/profile.png")}
           style={{
             height:40,
             width:40,

@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import PopularServices from "../../screens/HomeScreens/PopularServices";
-import { getTypography } from "@/styles";
+import PhotoSection from "@/app/screens/ProfileScreens/photoSection";
+import TopNavBar from "@/components/TopNavBar";
 import { allColors } from "@/constants/Colors";
 import { allFonts } from "@/constants/Fonts";
-import SectionHeading from "../../screens/HomeScreens/SectionHeading";
+import { getTypography } from "@/styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
-import TopNavBar from "@/components/TopNavBar";
+import SectionHeading from "../../screens/HomeScreens/SectionHeading";
 
 const ProfileTab = () => {
   return (
@@ -33,7 +33,7 @@ const ProfileTab = () => {
       
       />
 
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileHeader}>
         <View style={styles.imageWrapper}>
           <Image
@@ -63,17 +63,19 @@ const ProfileTab = () => {
       </View>
 
      
-      <SectionHeading
-         heading="Services"
+      <SectionHeading heading="Photos & Videos"
           onPress={() =>
             router.push({
               pathname: "/screens/SeeAllScreens/[SeeAll]",
-              params: { SeeAll: "Services" },
+              params: { SeeAll: "jobs_assigned" },
             })
           }
+          isSeeAll={true}
+        
         />
 
-      <PopularServices />
+        <PhotoSection />
+    
         </ScrollView>
    
 

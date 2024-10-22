@@ -148,12 +148,12 @@ borderTopLeftRadius:20,
       />
 
       <Tabs.Screen
-        name="assigned"
+        name="bookings"
         options={{
           headerShown: false,
         tabBarItemStyle:{
           
-          borderTopRightRadius:25,
+          // borderTopRightRadius:25,
           
           backgroundColor:allColors.tertiary1000,},
 
@@ -167,44 +167,7 @@ borderTopLeftRadius:20,
       />
 
 
-<Tabs.Screen
-              name="search"
-            
-              options={{
-                  headerShown: false,
-                  tabBarItemStyle:{backgroundColor:allColors.tertiary1000,
-                      height:35
-            ,
-            top:25,
-            // borderTopLeftRadius:10,
-            // borderTopRightRadius:10,
 
-
-                  },
-                  // tabBarIcon: ({focused}) => (
-                  
-                   
-                  //    <View style={{backgroundColor:'red'
-                  //     ,height:50,width:50,
-                  //     top:-50,
-                  //     borderRadius:10,
-                  //     // borderWidth:5,borderColor:allColors.secondary1000
-                      
-                  //     }} >
-                  //       <SearchFavourite height={25} width={25} />
-                  //    </View>
-                  
-
-                
-                   
-                  // ),
-                  tabBarButton: props => <CustomTabBarButton {...props} />,
-
-
-                  // tabBarButton: props => <CustomTabBarButton {...props} />,
-            
-              }}
-          />
            
 
 
@@ -213,7 +176,7 @@ borderTopLeftRadius:20,
         options={{
           headerShown: false,
           tabBarItemStyle:{
-            borderTopLeftRadius:25,
+            // borderTopLeftRadius:25,
             backgroundColor:allColors.tertiary1000,},
           tabBarIcon: ({ focused }) => (
             focused ? <AnalyticsVariant height={50} /> :
