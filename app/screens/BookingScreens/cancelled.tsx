@@ -35,9 +35,11 @@ export default function CancelledScreen() {
             key={item.id}
             item={item} 
             screenName={"Cancelled"}
-            buttonBG={allColors.primary200}
-            textColor={allColors.primary1000}
-            contentHeight={380}
+            badgeTitle={"Cancelled"}
+            badgeBackgroundColor={ allColors.primary200}
+            badgeTextColor={allColors.primary1000}
+  
+            contentHeight={300}
             bookAgain={()=> router.push('/screens/PaymentScreens/PaymentMethods')}
             showButton={true}
         

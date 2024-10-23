@@ -30,7 +30,6 @@ export default function Layout() {
 
       searchDot={true}
       backBtnWithTitle={true}
-   
       title="Inbox"
       style={{ padding: 10, marginTop: 40,  }}
        

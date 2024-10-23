@@ -47,7 +47,7 @@ const MyCalendarScreen = () => {
      
       title={"My Calendar"}
       backBtnWithTitle={true}
-      dotBtn={true}
+      // dotBtn={true}
       style={{
         padding: 10,
         marginTop: 30,
@@ -93,8 +93,8 @@ const MyCalendarScreen = () => {
             isSeeAll={ selectedDate !== '' ? true : false }
         style={{paddingHorizontal:0 }} heading={
             selectedDate !== '' ?
-             'Service Booking (3)' :
-            'Service Booking (0)'}/>
+             'Upcoming Booking (3)' :
+            'Upcoming Booking (0)'}/>
 
       {selectedDate !== '' ?   
         

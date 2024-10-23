@@ -45,6 +45,7 @@ export const UPCOMING_BOOKINGS_DATA = [
     image: require("@/assets/images/house_cleaning_booking.png"),
     title: "House Cleaning",
     description: "Jenny Wilson",
+    category:'Cleaning'
   },
 
   {
@@ -52,6 +53,8 @@ export const UPCOMING_BOOKINGS_DATA = [
     image: require("@/assets/images/garage_cleaning_booking.png"),
     title: "Garage Cleaning",
     description: "Florencio Dorrance",
+    category:'Cleaning'
+
   },
 
   {
@@ -59,6 +62,8 @@ export const UPCOMING_BOOKINGS_DATA = [
     image: require("@/assets/images/laundry_booking.png"),
     title: "Laundry",
     description: "Jenny Wilson",
+    category:'Laundry'
+
   },
 ];
 

@@ -203,9 +203,12 @@ function CustomDrawerContent(props: any) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() =>
-            router.push("/screens/NotificationScreens/NotificationSettings")
-          }
+
+onPress={() =>
+  router.push("/screens/Reviews")
+}
+
+          
           style={styles.drawerItem}
         >
           <IconButton

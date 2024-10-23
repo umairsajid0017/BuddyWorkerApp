@@ -21,10 +21,14 @@ const TabBar = ({
   const [selectedTab, setSelectedTab] = useState<string>("All");
 
   return (
-    <ScrollView 
+  
+    <View>
+        <ScrollView 
     showsHorizontalScrollIndicator={false}
     horizontal
-    contentContainerStyle={[styles.container,style]}>
+    contentContainerStyle={[styles.container,style]}
+
+    >
       {data.map((tab: any) => (
         <TouchableOpacity
           key={tab}
@@ -56,6 +60,7 @@ const TabBar = ({
         </TouchableOpacity>
       ))}
     </ScrollView>
+    </View>
   );
 };
 

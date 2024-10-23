@@ -20,6 +20,7 @@ import { router } from "expo-router";
 import UpcomingScreen from "../BookingScreens/upcoming";
 import { UPCOMING_BOOKINGS_DATA } from "@/data/data";
 import BookingCard from "@/components/BookingCard";
+import NotFound from "@/components/NotFound";
 
 const MyServices = () => {
   // States for each switch
@@ -40,7 +41,13 @@ const MyServices = () => {
       // Apply the gradient at an angle of roughly 174 degrees
       start={{ x: 0.5, y: 0 }} // Starting point of the gradient
       end={{ x: 0.1, y: 1 }}
-      style={{ ...StyleSheet.absoluteFillObject, padding: 15 }}
+      style={{ 
+ 
+        ...StyleSheet.absoluteFillObject,
+        paddingTop: 18,
+        paddingHorizontal: 12,
+
+       }}
     >
       <StatusBar
         barStyle="light-content" // Set the text/icons to light content, use "dark-content" for dark text/icons
@@ -55,31 +62,32 @@ const MyServices = () => {
         title="My Services"
       />
 
-      {/* Notification settings list */}
-      <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.scrollView}>
-    {UPCOMING_BOOKINGS_DATA.map((item) => {
-            return (
-              <BookingCard
-                key={item.id}
-                item={item}
-                screenName={"Started"}
-                buttonBG={allColors.primary200}
-                textColor={allColors.primary1000}
-                contentHeight={380}
-                showButton={true}
-                title1={"Reject Work"}
-                title2={"Start Work"}
-                // onPress1={() => {
-                //   setItem(item);
-                //   bottomSheetRef.current.open();
-                // }}
-              />
-            );
-          })}
+{UPCOMING_BOOKINGS_DATA.length === 0 ? (
+        <NotFound
+          title={"You have no completed booking"}
+          subTitle={
+            "You do not have a completed booking. Make a new booking by clicking the button below"
+          }
+        />
+      ) : (
+        <ScrollView>
+          {UPCOMING_BOOKINGS_DATA.map((item) => {
+            return <BookingCard 
+            key={item.id}
+            item={item}
+             screenName={"my_services"} 
+             badgeTitle={item.category}
+             badgeBackgroundColor={ allColors.success300 }
+             badgeTextColor={allColors.success800}
+            contentHeight={500}
+            title1={'Edit'}
+            title2={'Delete'}
+            showButton={true}
 
-      </ScrollView>
+            />;
+          })}
+        </ScrollView>
+      )}
 
     
 

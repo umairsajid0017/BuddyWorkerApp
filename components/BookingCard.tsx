@@ -24,8 +24,9 @@ const ExpandableServiceCard = ({
   item,
   bookAgain,
   screenName,
-  textColor,
-  buttonBG,
+  badgeTitle,
+  badgeBackgroundColor,
+  badgeTextColor,
   contentHeight,
   onPress1,
   onPress2,
@@ -106,12 +107,12 @@ const ExpandableServiceCard = ({
           {showButton && (
             <View style={styles.buttonRow}>
                       <View
-                style={[styles.completedButton, { backgroundColor: buttonBG }]}
+                style={[styles.completedButton, { backgroundColor: badgeBackgroundColor }]}
               >
                 <Text
-                  style={[styles.completedButtonText, { color: textColor }]}
+                  style={[styles.completedButtonText, { color: badgeTextColor }]}
                 >
-                  {screenName}
+                  {badgeTitle}
                 </Text>
               </View>
               
@@ -120,7 +121,7 @@ const ExpandableServiceCard = ({
                 style={styles.detailsButton}
               >
                 <Text style={styles.detailsButtonText}>
-                  {expanded ? "Show Less" : "Assigned"}
+                  {expanded ? "Show Less" : "Details"}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -160,10 +161,10 @@ const ExpandableServiceCard = ({
             </Text>
           </View>
 
-          {screenName === "Completed" && (
+          {(screenName === "Completed") && (
             <View>
               {/* Before Images */}
-              <Text style={styles.imageSectionTitle}>Before Image</Text>
+              <Text style={styles.imageSectionTitle}>Images</Text>
               <RightBigImageGrid />
 
               {/* After Images */}
@@ -172,7 +173,21 @@ const ExpandableServiceCard = ({
             </View>
           )}
 
-          {(screenName === "Started" || screenName === "Cancelled") && (
+
+
+{( screenName === "my_services") && (
+            <View>
+              {/* Before Images */}
+              <Text style={styles.imageSectionTitle}>Images</Text>
+              <RightBigImageGrid />
+
+             
+            </View>
+          )}
+
+          
+
+          {(screenName === "active" || screenName === "Cancelled") && (
             <Image
               source={require("@/assets/images/map_view.png")}
               style={styles.mapImage}
@@ -180,7 +195,7 @@ const ExpandableServiceCard = ({
             />
           )}
 
-          {screenName !== "Cancelled" && (
+          {(screenName === "active" || screenName === "my_services") && (
             <TwoButtonsView
               onPress1={onPress1}
               onPress2={onPress2}
@@ -189,9 +204,9 @@ const ExpandableServiceCard = ({
             />
           )}
 
-          {screenName === "Cancelled" && (
+          {/* {screenName === "Cancelled" && (
             <LongButton title={"Book Again"} onPress={bookAgain} />
-          )}
+          )} */}
         </View>
       </Animated.View>
     </Animated.View>

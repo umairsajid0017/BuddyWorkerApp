@@ -180,7 +180,7 @@ const TopNavBar = ({
 
       {messageNotification && (
         <View style={{ flexDirection: "row" }}>
-          <PrimaryButton onPress={() => router.push("/screens/Inbox")}>
+          <PrimaryButton onPress={() => router.push("/screens/Inbox/ChatsList")}>
             <Message height={45} width={45} style={{ marginRight: 10 }} />
           </PrimaryButton>
           <PrimaryButton

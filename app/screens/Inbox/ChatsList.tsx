@@ -1,5 +1,6 @@
 import FloatingActionButton from '@/components/FloatingActionButton';
 import IconButton from '@/components/IconButton';
+import TopNavBar from '@/components/TopNavBar';
 import { allColors } from '@/constants/Colors';
 import { allFonts } from '@/constants/Fonts';
 import { getTypography } from '@/styles';
@@ -7,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, Animated, StatusBar } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 
 const ChatsList = () => {
@@ -116,25 +117,36 @@ const ChatsList = () => {
   );
 
   return (
+
     <LinearGradient
     // Define the colors for the gradient
     colors={["#1C0D24", "#6A318A"]}
     // Apply the gradient at an angle of roughly 174 degrees
-    start={{ x: 0.1, y: 0 }} // Starting point of the gradient
+    start={{ x: 0.5, y: 0 }} // Starting point of the gradient
     end={{ x: 0.1, y: 1 }}
-    style={{
-      ...StyleSheet.absoluteFillObject,
-      paddingTop: 18,
-      paddingHorizontal: 15,
-    }}
+    style={{ ...StyleSheet.absoluteFillObject }}
   >
+      <StatusBar
+        barStyle="light-content" // Set the text/icons to light content, use "dark-content" for dark text/icons
+      />
+    <TopNavBar
+
+      searchDot={true}
+      backBtnWithTitle={true}
+      title="Inbox"
+      style={{ padding: 10, marginTop: 40,  }}
+       
+
+    />
+
+
     <FlatList
       data={chats}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
       contentContainerStyle={styles.chatList}
     />
-    <FloatingActionButton/>
+    {/* <FloatingActionButton/> */}
 
     </LinearGradient>
   );
@@ -142,6 +154,8 @@ const ChatsList = () => {
 
 const styles = StyleSheet.create({
   chatList: {
+    paddingTop: 18,
+      paddingHorizontal: 15,
     // padding: 10,
   },
   chatItem: {

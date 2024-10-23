@@ -32,10 +32,13 @@ export default function CompletedScreen() {
           {UPCOMING_BOOKINGS_DATA.map((item) => {
             return <BookingCard 
             key={item.id}
-            item={item} screenName={"Completed"} 
-            buttonBG={allColors.success300}
-            textColor={allColors.success800}
-            contentHeight={820}
+            item={item}
+             screenName={"Completed"} 
+             badgeTextColor={allColors.success800}
+             badgeBackgroundColor={allColors.success300}
+             badgeTitle={"Completed"}
+
+            contentHeight={750}
             title1={'Book Again'}
             title2={'View Receipt'}
             showButton={true}

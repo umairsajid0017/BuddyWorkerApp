@@ -21,9 +21,9 @@ const ReviewCard = () => {
             <Text style={styles.ratingText}>5</Text>
           </View>
         </View>
-       <View  style={styles.ellipsis} >
+       {/* <View  style={styles.ellipsis} >
        <Ionicons name="ellipsis-horizontal" size={15} color="#fff"/>
-       </View>
+       </View> */}
       </View>
 
       {/* Review Text */}
