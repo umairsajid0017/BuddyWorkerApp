@@ -1,30 +1,28 @@
 import BookingCard from "@/components/BookingCard";
-import SuccessModal from "@/components/SuccessModal";
+import IconButton from "@/components/IconButton";
 import NotFound from "@/components/NotFound";
 import RawBottomSheet from "@/components/RawBottomSheet";
+import SuccessModal from "@/components/SuccessModal";
 import TwoButtonsView from "@/components/TwoButtonsView";
 import { allColors } from "@/constants/Colors";
 import { allFonts } from "@/constants/Fonts";
 import { UPCOMING_BOOKINGS_DATA } from "@/data/data";
 import { getTypography } from "@/styles";
-import { LinearGradient } from "expo-linear-gradient";
-import { createRef, useRef, useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
-import { EvilIcons, Ionicons } from "@expo/vector-icons";
-import IconButton from "@/components/IconButton";
 import { requestGalleryPermission } from "@/utils/Permission";
+import { EvilIcons, Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRef, useState } from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-import RBSheet from "react-native-raw-bottom-sheet";
 import BottomSheetView from "@/components/BottomSheetView";
 import { Portal } from "react-native-portalize";
 
